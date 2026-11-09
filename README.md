@@ -1,5 +1,9 @@
 # Visual Studio Code LaTeX Workshop Extension
 
+> Personal fork: **LaTeX Workshop (Sleep Recovery)** by `kosukemtr`.
+> This build adds WebSocket health checks and reloads the latest PDF after reconnecting.
+> See [installation, validation, and rollback instructions](SLEEP-RECOVERY.md).
+
 <!-- [![version](https://img.shields.io/visual-studio-marketplace/v/James-Yu.latex-workshop)](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 [![updated](https://img.shields.io/visual-studio-marketplace/last-updated/James-Yu.latex-workshop)](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
 [![release](https://img.shields.io/visual-studio-marketplace/release-date/James-Yu.latex-workshop)](https://vsmarketplacebadge.apphb.com/downloads-short/James-Yu.latex-workshop.svg)
