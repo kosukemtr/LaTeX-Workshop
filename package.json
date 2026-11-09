@@ -3049,6 +3049,7 @@
     "lint:fix": "eslint --fix --cache .",
     "release": "npm run clean && npm run lint && npm run compile && vsce package",
     "test": "node ./out/test/runTest.js",
+    "test:viewer": "node --test test/viewer/*.test.mjs",
     "watch-src": "tsc -watch -p tsconfig.json",
     "watch-viewer": "tsc -watch -p viewer/tsconfig.json",
     "update-grammar": "node ./dev/update-grammar.mjs"

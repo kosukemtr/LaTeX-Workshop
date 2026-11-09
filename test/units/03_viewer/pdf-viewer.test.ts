@@ -305,6 +305,22 @@ describe(path.basename(__filename).split('.')[0] + ':', () => {
             assert.hasLog(`Viewer disconnected, reloading ${pdfUri.toString(true)} .`)
         })
 
+        it('should reload the PDF after the viewer WebSocket reconnects', async () => {
+            const loaded = waitMessage('loaded')
+            await viewInWebviewPanel(pdfUri, 'current', true)
+            await loaded
+            const client = [...manager.getClients(pdfUri) ?? []][0]
+            assert.ok(client)
+
+            const reloaded = waitMessage('loaded', 10000)
+            client.websocket.close()
+            await reloaded
+
+            const reconnected = [...manager.getClients(pdfUri) ?? []][0]
+            assert.ok(reconnected)
+            assert.notStrictEqual(reconnected.websocket, client.websocket)
+        })
+
         it('should not reload the webview panel again when the reload limit is reached', async () => {
             const promise = waitMessage('loaded')
             await viewInWebviewPanel(pdfUri, 'current', true)
@@ -440,10 +456,12 @@ describe(path.basename(__filename).split('.')[0] + ':', () => {
             assert.strictEqual(openStub.callCount, 0)
         })
 
-        it('should accept `ping` message and do nothing', async () => {
-            const promise = waitMessage('ping')
+        it('should reply to `ping` so the viewer can detect a suspended connection', async () => {
+            const promise = new Promise<string>(resolve => {
+                websocket.once('message', message => resolve(message.toString()))
+            })
             websocket.send(JSON.stringify({ type: 'ping' }))
-            await promise
+            assert.strictEqual(await promise, JSON.stringify({ type: 'pong' }))
         })
 
         it('should accept `add_log` message and add the message to LW log', async () => {

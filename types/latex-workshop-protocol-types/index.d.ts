@@ -32,6 +32,8 @@ export type ServerResponse = {
     textAfterSelection: string
 } | {
     type: 'reload'
+} | {
+    type: 'pong'
 }
 
 export type PdfViewerParams = {

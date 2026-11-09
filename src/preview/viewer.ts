@@ -298,7 +298,7 @@ function handler(websocket: ws, msg: string): void {
             break
         }
         case 'ping': {
-            // nothing to do
+            websocket.send(JSON.stringify({ type: 'pong' }))
             break
         }
         case 'add_log': {

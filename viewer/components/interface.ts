@@ -48,6 +48,7 @@ export type PDFViewerApplicationType = {
         open(): void
     },
     initializedPromise: Promise<void>,
+    pdfDocument?: unknown,
     isViewerEmbedded: boolean,
     pdfViewer: {
         _currentScale: number,
